@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODOS</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- VUE -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <img src="assets/logo.png" alt="" />
+      </header>
+
+      <main>
+        <div class="wrapper">
+          <h1>TODO LIST</h1>
+
+          <div class="new-todo">
+            <p class="error" v-show="error">Errore! Inserisci del testo!</p>
+            <input
+              type="text"
+              placeholder="Aggiugni un nuovo todo"
+              v-model="newTodo"
+              @keyup.enter="addTodo"
+            />
+            <button class="add-btn" @click="addTodo">Aggiungi</button>
+          </div>
+
+          <ul class="todo-list" v-if="todos.length > 0">
+            <li v-for="(element, index) in todos">
+              <p
+                :style="[element.done === false ? {'text-decoration':'none'} : {'text-decoration':'line-through'}]"
+              >
+                {{ element.todo }}
+              </p>
+              <span class="delete" @click="removeTodo(index)">&cross;</span>
+            </li>
+          </ul>
+        </div>
+      </main>
+    </div>
+    <!-- JS -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
